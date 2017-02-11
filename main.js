@@ -22,7 +22,62 @@ $(function() {
 	$("#width").val(w).parent().addClass('is-dirty')
 	$("#height").val(h).parent().addClass('is-dirty')
 
-	$('#game').append('<table id="gameboard" bgcolor="#ffffff" border="0" cellpadding="0em" cellspacing="0em" align="center"></table>')
+	initgameboard(h, w)
+})
+
+function setWHVals() {
+	window.history.replaceState({'html': $('#gamesec').html()}, '', window.location.href)
+
+	w = parseInt($('#width').val())
+	h = parseInt($('#height').val())
+
+	initgameboard(h, w)
+	window.history.pushState({'html': $('#gamesec').html()}, '', '/?width=' + w + '&height=' + h)
+}
+window.onpopstate = function(e){
+    if(e.state){
+    	// console.log(e.state.html)
+        $('#gamesec').html(e.state.html);
+
+        w = getParameterByName('width');
+        h = getParameterByName('height');
+
+        $("#width").val(w).parent().addClass('is-dirty')
+        $("#height").val(h).parent().addClass('is-dirty')
+
+        for (var i = 0; i < w*2 + 1; i++) {
+        	nom = "";
+        	if (i%2 == 0) {
+        		nom = "gameboard-row-h" + i/2;
+        	} else {
+        		nom = "gameboard-row-v" + Math.floor(i/2);
+        	}
+
+        	for (var j = 0; j < h*2 + 1; j++) {
+        			if (i % 2 == 0) {
+        				if (j % 2 == 0) {
+        				} else {
+        					nom2 = nom + "-cell-e" + Math.floor(j/2);
+        					$("#" + nom2).hover(mouseon, mouseoff).click(mouseclick);
+        				}
+        			} else {
+        				if (j % 2 == 0) {
+        					nom2 = nom + "-cell-e" + j/2;
+        					$("#" + nom2).hover(mouseon, mouseoff).click(mouseclick);
+        				} else {
+        					nom2 = nom + "-cell-b" + Math.floor(j/2);
+        					$("#" + nom2).hover(mouseon, mouseoff);
+        				}
+        			}
+        	}	
+        }
+    }
+};
+
+initgameboard = function(h, w) {
+	resetgameboard()
+
+	$('#game').html('<table id="gameboard" bgcolor="#ffffff" border="0" cellpadding="0em" cellspacing="0em" align="center"></table>')
 
 	for (var i = 0; i < w*2 + 1; i++) {
 		nom = "";
@@ -62,7 +117,20 @@ $(function() {
 				}
 		}	
 	}
-})
+}
+
+resetgameboard = function() {
+	$('#game').html('')
+
+	playerturn = 1	
+	setturnsignal( $('#turn-signal') );
+
+
+	playerscores = [0, 0, 0]
+	setplayerscore(1);
+	setplayerscore(2);
+
+}
 
 mouseon = function() {
 	// $(this).addClass('edge-hover')
@@ -104,11 +172,11 @@ mouseclick = function() {
 	if (check != 0) {
 		playerscores[playerturn] += 1;
 		$('#player' + playerturn + "-score").html('Player ' + playerturn + ": " + playerscores[playerturn])
+		setplayerscore(playerturn)
+	} else {
 		playerturn = 3 - playerturn;
+		setturnsignal( $('#turn-signal') );
 	}
-
-	playerturn = 3 - playerturn;
-	setturnsignal( $('#turn-signal') );
 }
 setturnsignal = function(e) {
 	if (playerturn==1) {
@@ -116,6 +184,15 @@ setturnsignal = function(e) {
 	} else {
 		e.html("Player Two's Turn")
 	}
+}
+setplayerscore = function(playerturn) {
+	playerturnN = ''
+	if (playerturn == 1) {
+		playerturnN = 'One'
+	} else if (playerturn == 2) {
+		playerturnN = 'Two'
+	}
+	$('#player' + playerturn + "-score").html('Player ' + playerturnN + ": " + playerscores[playerturn])
 }
 cellfrompos = function(hv, x, y) {
 	return "gameboard-row-" + hv + "" + x + "-cell-e" + y;
