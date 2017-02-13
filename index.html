@@ -84,9 +84,6 @@
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 								Go
 							</button>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="reset">
-								Reset
-							</button>
 						</form>
 					</div>
 
@@ -96,6 +93,18 @@
 						<div id="game"></div>
 						<p style="float: left;" id='player1-score'>Player 1: 0</p>
 						<p style="float: right;" id='player2-score'>Player 2: 0</p>
+						<br><form action="javascript:savestate()">
+							<!-- Accent-colored raised button with ripple -->
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							  Save
+							</button>
+						</form>
+						<form action="javascript:setWHVals()">
+							<!-- Accent-colored raised button with ripple -->
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							  Restart
+							</button>
+						</form>
 					</div>
 
 				</div>

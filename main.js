@@ -25,14 +25,17 @@ $(function() {
 	initgameboard(h, w)
 })
 
+function savestate() {
+	window.history.replaceState({'html': $('#gamesec').html()}, '', window.location.href)	
+}
 function setWHVals() {
-	window.history.replaceState({'html': $('#gamesec').html()}, '', window.location.href)
+	savestate()
 
 	w = parseInt($('#width').val())
 	h = parseInt($('#height').val())
 
 	initgameboard(h, w)
-	window.history.pushState({'html': $('#gamesec').html()}, '', '/?width=' + w + '&height=' + h)
+	window.history.pushState({'html': $('#gamesec').html()}, '', './?width=' + w + '&height=' + h)
 }
 window.onpopstate = function(e){
     if(e.state){
