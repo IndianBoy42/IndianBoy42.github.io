@@ -10,20 +10,20 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-$(function() {
-	w = getParameterByName('width');
-	h = getParameterByName('height');
+// $(function() {
+// 	w = getParameterByName('width');
+// 	h = getParameterByName('height');
 
-	if (w=='' || h=='' || w==null || h==null) {
-		$('#game').html("<p align='center'>Set the width and height values</p>")
-		return
-	}
+// 	if (w=='' || h=='' || w==null || h==null) {
+// 		$('#game').html("<p align='center'>Set the width and height values</p>")
+// 		return
+// 	}
 
-	$("#width").val(w).parent().addClass('is-dirty')
-	$("#height").val(h).parent().addClass('is-dirty')
+// 	$("#width").val(w).parent().addClass('is-dirty')
+// 	$("#height").val(h).parent().addClass('is-dirty')
 
-	initgameboard(h, w)
-})
+// 	initgameboard(h, w)
+// })
 
 function savestate() {
 	window.history.replaceState({'html': $('#gamesec').html()}, '', window.location.href)	
@@ -35,15 +35,18 @@ function setWHVals() {
 	h = parseInt($('#height').val())
 
 	initgameboard(h, w)
-	window.history.pushState({'html': $('#gamesec').html()}, '', './?width=' + w + '&height=' + h)
+	// window.history.pushState({'html': $('#gamesec').html()}, '', './?width=' + w + '&height=' + h)
+	window.history.pushState({'html': $('#gamesec').html()}, '', window.location.href)
 }
 window.onpopstate = function(e){
     if(e.state){
     	// console.log(e.state.html)
         $('#gamesec').html(e.state.html);
 
-        w = getParameterByName('width');
-        h = getParameterByName('height');
+        // w = getParameterByName('width');
+        w = $('#gameboard').attr('gwidth')
+        // h = getParameterByName('height');
+        h = $('#gameboard').attr('gheight')
 
         $("#width").val(w).parent().addClass('is-dirty')
         $("#height").val(h).parent().addClass('is-dirty')
@@ -80,7 +83,15 @@ window.onpopstate = function(e){
 initgameboard = function(h, w) {
 	resetgameboard()
 
-	$('#game').html('<table id="gameboard" bgcolor="#ffffff" border="0" cellpadding="0em" cellspacing="0em" align="center"></table>')
+	$('#game').html('<table id="gameboard"></table>')
+	$('#gameboard')
+		.attr('bgcolor', '#ffffff')
+		.attr('border', '0')
+		.attr('cellpadding', '0')
+		.attr('cellspacing', '0')
+		.attr('align', 'center')
+		.attr('gwidth', w)
+		.attr('gheight', h)
 
 	for (var i = 0; i < w*2 + 1; i++) {
 		nom = "";
