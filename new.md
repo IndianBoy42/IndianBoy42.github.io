@@ -1,5 +1,6 @@
 ---
-title: Document Center
+title: This is my title
+layout: post
 ---
 
 ## A New Post
