@@ -1,3 +1,7 @@
+---
+title: Darshna Sadhnani's Theory of Friendship
+---
+
 ## Darshna Sadhnani's Theory of Friendship
 
 - **People should always exploit friends**
