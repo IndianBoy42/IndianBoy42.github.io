@@ -15,7 +15,7 @@ title: Darshna Sadhnani's Theory of Friendship
 
 ---
 
-## Friends take other people's pens, without asking
+## Friends take each other's pens without asking
 
 ---
 
