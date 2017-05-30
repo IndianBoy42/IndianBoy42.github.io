@@ -16,11 +16,13 @@
   <body>
 
       <header>
-        <h1>Anshuman Medhi</h1>
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
         <p>{{ site.description | default: site.github.project_tagline }}</p>
       </header>
 
       <div id="banner">
+        <a class="button fork"><strong>{{ page.title }}</strong></a>
+      
         {% if site.show_downloads %}
           <div class="downloads">
             <span>Downloads:</span>
