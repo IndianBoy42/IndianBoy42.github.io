@@ -20,6 +20,12 @@
         <p>{{ page.title | site.description | default: site.github.project_tagline }}</p>
       </header>
 
+    <div id="banner">
+        <span id="logo"></span>
+
+        <a href="{{ site.github.repository_url }}" class="button fork"><strong>{{ page.title | site.description | default: site.github.project_tagline }}</strong></a>
+      </div><!-- end banner -->
+    
     <div class="wrapper">
       <section>
         {{ content }}
