@@ -17,12 +17,8 @@
 
       <header>
         <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        <p>{{ site.description | default: site.github.project_tagline }}</p>
+        <p>{{ page.tittle | site.description | default: site.github.project_tagline }}</p>
       </header>
-
-      <div id="banner">
-        <a href="{{ site.github.repository_url }}" class="button fork"><h2>{{ page.title }}</h2></a>
-      </div><!-- end banner -->
 
     <div class="wrapper">
       <section>
