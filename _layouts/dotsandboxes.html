@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>{{ site.title | default: site.github.repository_name }} by {{ site.github.owner_name }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+	  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-amber.min.css" />
+	  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	
+	  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+  	<link rel="stylesheet" type="text/css" href="../style.css" />
+	  <script type="text/javascript" src="../main.js"></script>
+  </head>
+  <body>
+
+      <header>
+        <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        <p>{{ page.title | site.description | default: site.github.project_tagline }}</p>
+      </header>
+
+    <div class="wrapper">
+      <section>
+        <div class="section">
+						<h3>Options</h3>
+
+						<form action="javascript:setWHVals()">
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="width" name="width">
+								<label class="mdl-textfield__label" for="width">Width</label>
+								<span class="mdl-textfield__error">Input is not a number!</span>
+							</div>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+								<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="height" name="height">
+								<label class="mdl-textfield__label" for="height">Height</label>
+								<span class="mdl-textfield__error">Input is not a number!</span>
+							</div>
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+								Go
+							</button>
+						</form>
+					</div>
+
+					<div class="section" id='gamesec'>
+						<h3>Game</h3>
+						<p align="center" id='turn-signal'>Player One's Turn</p>
+						<div id="game"></div>
+						<p style="float: left;" id='player1-score'>Player 1: 0</p>
+						<p style="float: right;" id='player2-score'>Player 2: 0</p>
+						<br><form action="javascript:savestate()">
+							<!-- Accent-colored raised button with ripple -->
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							  Save
+							</button>
+						</form>
+						<form action="javascript:setWHVals()">
+							<!-- Accent-colored raised button with ripple -->
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+							  Restart
+							</button>
+						</form>
+					</div>
+      </section>
+      
+      <footer>
+        {% if site.github.is_project_page %}
+          <p>Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+        {% endif %}
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+
+    {% if site.google_analytics %}
+      <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
+  </body>
+</html>
